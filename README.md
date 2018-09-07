@@ -18,3 +18,6 @@
  - Senha: Parte do email anterior ao "@" invertida.
     - Exemplo: >> Email: abc@gmail.com  / Senha:  cba
 
+# Instruções para testes
+ Para abrir e testar, será necessário a utilização da ferramenta <b>NetBeans IDE</b> com os devidos recursos instalados para <b>Java Web</b> e Servidor <b>Tomcat</b>.
+
