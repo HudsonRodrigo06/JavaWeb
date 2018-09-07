@@ -4,7 +4,7 @@
 - CSS3
 - Bootstrap
 - JavaScript
-- AJAX: 
+- AJAX
 - Controle de Sessão
 
 # Descrição referente ao projeto HoroscopoII
