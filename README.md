@@ -15,6 +15,6 @@
 # Login
  O login deve ser realizado da seguinte maneira:
  - Email
- - Senha: Parte anterior ao "@" invertida.
+ - Senha: Parte do email anterior ao "@" invertida.
     - Exemplo: >> Email: abc@gmail.com  / Senha:  cba
 
