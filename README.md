@@ -21,5 +21,5 @@
 - Teste simples de "Captcha" - resposta de questões matemáticas - utilizando JavaScript para contar e verificar a quantidade de acertos.
 
 # Instruções para testes
- Para abrir e testar os arquivos teste repositporio, será necessário a utilização da ferramenta <b>NetBeans IDE</b> com os devidos recursos instalados para <b>Java Web</b> e Servidor <b>Tomcat</b>.
+ Para abrir e testar os arquivos teste repositório, será necessário a utilização da ferramenta <b>NetBeans IDE</b> com os devidos recursos instalados para <b>Java Web</b> e Servidor <b>Tomcat</b>.
 
