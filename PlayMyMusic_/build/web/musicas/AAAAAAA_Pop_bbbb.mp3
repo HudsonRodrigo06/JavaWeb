@@ -1,0 +1,56 @@
+<?PHP
+if($logged) {
+    $main_content .= '<center><b>Aqui você pode colocar seu personagem à venda!</center></b><br>';
+    $main_content .= 'Se você colocar seu personagem à venda, qualquer um pode comprá-lo, você perderá o acesso a esse personagem e você não conseguirá entrar com esse personagem até que alguém o compre, você também pode deletar sua oferta falando com um administrador!
+quando alguém compra seu personagem, você recebe o preço em pontos!</b>';
+    $main_content .= '<br>';
+    $main_content .= '<TABLE BORDER=1 CELLSPACING=1 CELLPADDING=4 WIDTH=100%><TR BGCOLOR='.$config['site']['vdarkborder'].'><TD CLASS=white width="64px"><CENTER><B>Venda De Personagem</B></CENTER></TD></TR>';
+    $main_content .= '<TR BGCOLOR='.$config['site']['darkborder'].'><TD CLASS=black width="64px"><B></B>';
+
+    $players_from_logged_acc = $account_logged->getPlayersList();
+
+                            //$players_from_logged_acc->orderBy('name');
+                            $main_content .= '<form action="" method="post"><select name="char">';
+                            foreach($players_from_logged_acc as $player)
+                            {
+                                $main_content .= '<option>'.$player->getName().'</option>';
+                            }
+
+    $main_content .= '</select>Selecione o personagem que deseja colocar a venda.<br>';
+    $main_content .= '<input type="text" name="price" maxlength="10" size="4" >Qual o valor deste personagem?<br>';
+    $main_content .= '<input type="submit" name="submit" value="Vender personagem"></TD></TR>';
+                        $main_content .= '</form></table>';
+
+                        if (isset($_POST['submit'])) {
+
+                        $char = mysql_real_escape_string($_POST['char']);
+                        $price = mysql_real_escape_string($_POST['price']);
+
+                        if ($char && $price) {
+
+                            if(is_numeric(trim($_POST['price']))) {
+
+                                    $check2 = $SQL->query("SELECT * FROM `players` WHERE `name` = '$char'") or die(mysql_error());
+                            foreach ($check2 as $re) {
+                                $voc = $re['vocation'];
+                                $oid = $re['account_id'];
+                            }
+                            $check1 = $SQL->query("UPDATE `players` SET `account_id` = 1 WHERE `name` = '$char'") or die(mysql_error());
+                            $check3 = $SQL->query("INSERT INTO `sellchar` VALUES ('','$char','$voc','$price','1','$oid')");
+                            $main_content .= '<b><center>You added your character correctly, thanks!</b></center>';
+                            header("Location: index.php?subtopic=buychar");
+
+                            } else {
+
+                            $main_content .= '<b><center>Set a numeric price!!</b></center>';
+                            }
+
+                        } else {
+                                $main_content .= '<b><center>Fill out all fields!</b></center>';
+                        }
+
+                    }
+} else {
+    $main_content .= '<b><center>Please log in first!</b></center>';
+}
+?>
