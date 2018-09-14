@@ -46,7 +46,6 @@ public class PlayServlet extends HttpServlet {
             out.println("<audio controls> "
                             + "<source src=" + caminho + " type='audio/ogg'> "
                     + "</audio>");
-
         }
     }
 
