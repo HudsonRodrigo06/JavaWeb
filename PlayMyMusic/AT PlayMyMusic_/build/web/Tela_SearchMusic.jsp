@@ -1,9 +1,3 @@
-<%-- 
-    Document   : newjspTela_SearchMusic
-    Created on : 13/09/2018, 17:19:13
-    Author     : hudso
---%>
-
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="java.io.File"%>
@@ -23,11 +17,8 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         <script src="JS.js" type="text/javascript"></script>
-
-
     </head>
     <body>
-
         <div class="container mt-3">
             <h2>Search Music!</h2>
             <p>Type something in the input field to search the list for specific musics:</p>  
@@ -52,7 +43,6 @@
                                 sNome = arquivos[i].getName();
                 %>
                 <li name="nMusic" data-toggle='tooltip' title='Click to Play!!' value="<%=sNome%>" onclick="playMusic(this)" class="list-group-item list-group-item-action"> <%=sNome%></li> 
-
                 <%
                             }
                         } else {
@@ -70,23 +60,12 @@
                     //<li class="list-group-item list-group-item-action">Second item</li>
 
                 %>
-
-
-
             </ul> 
-
             <div id="player">
-
             </div>
-
-
             <%                    //if(fVazio)
                 out.println("<br><button type='button' onclick='home()' class='btn btn-outline-info'>Back to Home</button>");
             %>
         </div>     
-
-
     </body>
-
-
 </html>
