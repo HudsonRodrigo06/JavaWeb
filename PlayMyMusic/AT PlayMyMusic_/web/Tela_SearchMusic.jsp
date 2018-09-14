@@ -42,17 +42,17 @@
                         fpasta.mkdir();
 
                         File arq = new File(request.getServletContext().getRealPath("") + "musicas");
-                        
+
                         File[] arquivos = arq.listFiles();
                         int total = arquivos.length;
                         String sNome = "";
 
                         if (total > 0) {
-                            for (int i = 0; i < total; i++) {  
+                            for (int i = 0; i < total; i++) {
                                 sNome = arquivos[i].getName();
                 %>
                 <li name="nMusic" data-toggle='tooltip' title='Click to Play!!' value="<%=sNome%>" onclick="playMusic(this)" class="list-group-item list-group-item-action"> <%=sNome%></li> 
-                                
+
                 <%
                             }
                         } else {
@@ -71,11 +71,13 @@
 
                 %>
 
-                
+
 
             </ul> 
 
-            <div id="player"></div>
+            <div id="player">
+
+            </div>
 
 
             <%                    //if(fVazio)
@@ -86,5 +88,5 @@
 
     </body>
 
-  
+
 </html>

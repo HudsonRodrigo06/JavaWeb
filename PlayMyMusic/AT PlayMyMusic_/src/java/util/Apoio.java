@@ -1,5 +1,5 @@
 package util;
 
 public class Apoio {
-    static public String nMusic;
+    static public String nMusic, caminho;
 }

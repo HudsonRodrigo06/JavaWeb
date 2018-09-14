@@ -39,13 +39,16 @@ public class PlayServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
-            out.println("<br><h4>Reproduzindo: " + nome + " </h4>");
+            String estilo = " <marquee behavior=scroll>";
+
+            out.println("<br>"+estilo+"<h4>Reproduzindo: " + nome + " </h4></marquee>");
 
             String caminho = request.getServletContext().getRealPath("") + "musicas\\" + nome;
-            out.println("Caminho: " + caminho);
-            out.println("<audio controls> "
-                            + "<source src=" + caminho + " type='audio/ogg'> "
+            out.println("Path: " + caminho);
+            out.println("<br><br><audio controls> "
+                    + "<source src=" + caminho + " type='audio/mpeg'> "
                     + "</audio>");
+
         }
     }
 
