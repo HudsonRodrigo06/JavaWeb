@@ -52,7 +52,7 @@
 
                     } catch (Exception ex) {
 
-                        out.println("Caminho testado: " + request.getServletContext().getRealPath("") + "musicas");
+                       
                         out.println(ex);
                     }
 
@@ -64,7 +64,7 @@
             <div id="player">
             </div>
             <%                    //if(fVazio)
-                out.println("<br><button type='button' onclick='home()' class='btn btn-outline-info'>Back to Home</button>");
+                out.println("<br><button type='button' onclick='toHome()' class='btn btn-outline-info'>Back to Home</button>");
             %>
         </div>     
     </body>

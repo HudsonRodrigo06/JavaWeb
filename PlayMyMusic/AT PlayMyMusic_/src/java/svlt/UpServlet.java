@@ -24,56 +24,79 @@ import javax.servlet.http.Part;
 @WebServlet(name = "UpServlet", urlPatterns = {"/UpServlet"})
 public class UpServlet extends HttpServlet {
 
+    boolean ver(String mus, String cant, String simbs) {
+        for (int i = 0; i < simbs.length(); i++) {
+            if (mus.contains("" + simbs.charAt(i)) || cant.contains("" + simbs.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        // lê a pasta de destino
-        String pasta = "musicas";
-        Part filePart = request.getPart("file");  // Lê o arquivo de upload
-
-        String fileName = request.getParameter("musica") + "_" + request.getParameter("cbEstilos") + "_" + request.getParameter("cantor") + ".mp3";
-        fileName = fileName.replace(" ", "_");
-
-        OutputStream outS = null;
-        InputStream filecontent = null;
+        String simbolos = "!@#$%¨&¬*()-=+§[]{}ªº´`^~?/°:;>.<,/\\";
+        String sMusica = request.getParameter("musica");
+        String sEstilo = request.getParameter("cbEstilos");
+        String sCantor = request.getParameter("cantor");
+        
+        boolean valido = ver(sMusica, sCantor, simbolos);
         PrintWriter out = response.getWriter();
+        
+        if (valido) {
+            // lê a pasta de destino
+            String pasta = "musicas";
+            Part filePart = request.getPart("file");  // Lê o arquivo de upload
 
-        try {  //criando a pasta
+            String fileName = sMusica + "_" + sEstilo + "_" + sCantor + ".mp3";
+            fileName = fileName.replace(" ", "_");
 
-            File fpasta = new File(getServletContext().getRealPath("/") + "/" + pasta);
-            fpasta.mkdir();
-            outS = new FileOutputStream(new File(fpasta.getAbsolutePath() + "/" + fileName));
-            filecontent = filePart.getInputStream();
-            int read = 0;
-            byte[] bytes = new byte[1024];
+            OutputStream outS = null;
+            InputStream filecontent = null;
 
-            while ((read = filecontent.read(bytes)) != -1) {
-                outS.write(bytes, 0, read);
+            try {  //criando a pasta
+
+                File fpasta = new File(getServletContext().getRealPath("/") + "/" + pasta);
+                fpasta.mkdir();
+                outS = new FileOutputStream(new File(fpasta.getAbsolutePath() + "/" + fileName));
+                filecontent = filePart.getInputStream();
+                int read = 0;
+                byte[] bytes = new byte[1024];
+
+                while ((read = filecontent.read(bytes)) != -1) {
+                    outS.write(bytes, 0, read);
+                }
+
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>UpServlet</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Novo arquivo " + fileName + " criado na pasta " + pasta + "</h1>");
+                out.println("<a href=\"Tela_UploadMusic.jsp\" >New Upload</a>");
+                out.println("<a href=\"index.html\" style='padding-left: 10px;'>Back to Start</a>");
+                out.println("</body>");
+                out.println("</html>");
+
+                out.println();
+                out.println("");
+
+                out.close();
+                filecontent.close();
+                out.close();
+
+            } catch (Exception fne) {
+                out.println("Erro ao receber o arquivo");
+                out.println("<br/> ERRO: " + fne.getMessage());
+                out.println("<br/><a href=\"Tela_UploadMusic.jsp\" >New Upload</a>");
+                out.println("<a href=\"index.html\" style='padding-left: 10px;'>Back to Start</a>");
             }
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>UpServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Novo arquivo " + fileName + " criado na pasta " + pasta + "</h1>");
-            out.println("<a href=\"Tela_UploadMusic.jsp\" >New Upload</a>");
-            out.println("<a href=\"index.html\" style='padding-left: 10px;'>Back to Start</a>");
-            out.println("</body>");
-            out.println("</html>");
-
-            out.println();
-            out.println("");
-
-            out.close();
-            filecontent.close();
-            out.close();
-
-        } catch (Exception fne) {
-            out.println("Erro ao receber o arquivo");
-            out.println("<br/> ERRO: " + fne.getMessage());
+        } else {
+            out.println("Erro ao escrever nome do arquivo");
+            out.println(" <h4 style='color:red'>Simbolos não permitidos: " + simbolos + "</h4>");
             out.println("<br/><a href=\"Tela_UploadMusic.jsp\" >New Upload</a>");
             out.println("<a href=\"index.html\" style='padding-left: 10px;'>Back to Start</a>");
         }

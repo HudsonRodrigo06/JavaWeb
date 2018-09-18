@@ -40,13 +40,13 @@ public class PlayServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
 
 
-            out.println("<br><center><h4>Reproduzindo: " + nome + "</center>");
+            out.println("<br><center><h4>Reproduzindo: " + nome + "");
 
-            String caminho = request.getServletContext().getRealPath("") + "musicas\\" + nome;
+            String caminho = "musicas\\" + nome;
             out.println("Path: " + caminho);
-            out.println("<br><br><audio controls> "
+            out.println("<br><br><audio autoplay controls> "
                     + "<source src=" + caminho + " type='audio/mpeg'> "
-                    + "</audio>");
+                    + "</audio></center>");
 
         }
     }

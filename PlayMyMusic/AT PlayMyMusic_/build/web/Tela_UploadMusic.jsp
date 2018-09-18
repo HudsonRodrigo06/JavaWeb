@@ -49,7 +49,7 @@
                
                 <br>
                 <button type="submit" class="btn btn-outline-info">Upload</button>
-                <button type="button" onclick="home()" class="btn btn-outline-info">Home</button>
+                <button type="button" onclick="toHome()" class="btn btn-outline-info">Home</button>
             </div>
         </form>
 
